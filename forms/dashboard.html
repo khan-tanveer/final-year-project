@@ -64,7 +64,7 @@
             </div>
           </div>
           <!-- sidebar-header  -->
-          <div class="sidebar-search">
+          <!-- <div class="sidebar-search">
             <div>
               <div class="input-group">
                 <input
@@ -79,32 +79,32 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- sidebar-search  -->
           <div class="sidebar-menu">
             <ul>
               <li class="header-menu">
-                <span>General</span>
+                <span>Administrator</span>
               </li>
               <li class="sidebar-dropdown">
                 <a href="#">
                   <i class="fa fa-tachometer-alt"></i>
-                  <span>Dashboard</span>
-                  <span class="badge badge-pill badge-warning">New</span>
+                  <span>Employee</span>
+                  <!-- <span class="badge badge-pill badge-warning">New</span> -->
                 </a>
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href="#"
-                        >Dashboard 1
-                        <span class="badge badge-pill badge-success">Pro</span>
+                      <a href="EmployeeDetails.html"
+                        >Employee Details
+                        <!-- <span class="badge badge-pill badge-success">Pro</span> -->
                       </a>
                     </li>
                     <li>
-                      <a href="#">Dashboard 2</a>
+                      <a href="#">Employee Status</a>
                     </li>
                     <li>
-                      <a href="#">Dashboard 3</a>
+                      <a href="#">Customer Request</a>
                     </li>
                   </ul>
                 </div>
@@ -113,7 +113,7 @@
                 <a href="#">
                   <i class="fa fa-shopping-cart"></i>
                   <span>E-commerce</span>
-                  <span class="badge badge-pill badge-danger">3</span>
+                  <!-- <span class="badge badge-pill badge-danger">3</span> -->
                 </a>
                 <div class="sidebar-submenu">
                   <ul>
@@ -192,7 +192,7 @@
                   </ul>
                 </div>
               </li>
-              <li class="header-menu">
+              <!-- <li class="header-menu">
                 <span>Extra</span>
               </li>
               <li>
@@ -215,11 +215,11 @@
                 </a>
               </li>
             </ul>
-          </div>
+          </div> -->
           <!-- sidebar-menu  -->
-        </div>
+        <!-- </div> -->
         <!-- sidebar-content  -->
-        <div class="sidebar-footer">
+        <!-- <div class="sidebar-footer">
           <a href="#">
             <i class="fa fa-bell"></i>
             <span class="badge badge-pill badge-warning notification">3</span>
@@ -235,8 +235,82 @@
           <a href="#">
             <i class="fa fa-power-off"></i>
           </a>
-        </div>
+        </div> -->
       </nav>
+
+      <!-- table -->
+
+
+      <div class="table-responsive">
+        <table class="table">
+          <tr class="active">
+            <th>S.no</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>contact.no</th>
+            <th>Email</th>
+            <th>Address</th>
+          </tr>
+          <tr>
+            <td>01</td>
+            <td>tanveer</td>
+            <td>khan</td>
+            <td>987456321</td>
+            <td>test@test.com</td>
+            <td>15/454,ffbhsdas,gfaysdg</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>meraj</td>
+            <td>shaikh</td>
+            <td>987456321</td>
+            <td>test@test.com</td>
+            <td>15/454,ffbhsdas,gfaysdg</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Amir</td>
+            <td>shaikh</td>
+            <td>987456321</td>
+            <td>test@test.com</td>
+            <td>15/454,ffbhsdas,gfaysdg</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td>Sohail</td>
+            <td>shaikh</td>
+            <td>987456321</td>
+            <td>test@test.com</td>
+            <td>15/454,ffbhsdas,gfaysdg</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>Shubham</td>
+            <td>prasad</td>
+            <td>987456321</td>
+            <td>test@test.com</td>
+            <td>15/454,ffbhsdas,gfaysdg</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>rajan</td>
+            <td>prasad</td>
+            <td>987456321</td>
+            <td>test@test.com</td>
+            <td>15/454,ffbhsdas,gfaysdg</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td>tanveer</td>
+            <td>khan</td>
+            <td>987456321</td>
+            <td>test@test.com</td>
+            <td>15/454,ffbhsdas,gfaysdg</td>
+          </tr>
+        </table>
+      </div>
+
+  
     </div>
 
     <script>
@@ -260,6 +334,68 @@
           $(".page-wrapper").addClass("toggled");
         });
       });
+    </script>
+    <!-- firebase configguration -->
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCaN8IM8LbgtFZo_Wspcw0tnFWlurnBIzI",
+        authDomain: "<your-auth-domain>",
+        databaseURL:
+          "https://employees-payroll-location-default-rtdb.firebaseio.com",
+        projectId: "employees-payroll-location",
+        storageBucket: "<your-storage-bucket-url>",
+        messagingSenderId: "291692531469",
+        appId: "1:291692531469:android:f94f5d0006f1e47494aa44",
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      // let Empno = 0;
+
+      // function addItemsToList(name, imageUrl, email, contactNo) {
+      //   let ul = document.getElementById("list");
+      //   let header = document.createElement("h2");
+
+      //   let _name = document.createElement("li");
+      //   let _imageUrl = document.createElement("li");
+      //   let _email = document.createElement("li");
+      //   let _contactNo = document.createElement("li");
+
+      //   header.innerHTML = "Employee-" + ++Empno;
+
+      //   _name.innerHTML = "Name: " + name;
+      //   _imageUrl.innerHTML = "Image: " + imageUrl;
+      //   _email.innerHTML = "Email: " + email;
+      //   _contactNo.innerHTML = "ContactNo: " + contactNo;
+
+      //   ul.apppendChild(header);
+      //   ul.apppendChild(_name);
+      //   ul.apppendChild(_imageUrl);
+      //   ul.apppendChild(_email);
+      //   ul.apppendChild(_contactNo);
+      // }
+
+      // function fetchAllData() {
+      //   firebase
+      //     .database()
+      //     .ref("Employee-Database")
+      //     .once("value", function (snapshot) {
+      //       snapshot.forEach(function (childSnapshot) {
+      //         let name = childSnapshot.val().name;
+      //         let image = childSnapshot.val().imageUrl;
+      //         let email = childSnapshot.val().email;
+      //         let contact = childSnapshot.val().contact - no;
+
+      //         addItemsToList(name, image, email);
+      //       });
+      //     });
+      // }
+
+      // window.onload(fetchAllData());
+
+      fetch(
+        "https://employees-payroll-location-default-rtdb.firebaseio.com/Employee-Database"
+      ).then((res) => response.email);
+      console.log(res);
     </script>
     <!-- page-wrapper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

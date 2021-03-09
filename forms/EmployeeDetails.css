@@ -1,0 +1,21 @@
+.table-responsive {
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+.table {
+  margin-left: 5px;
+  margin-top: 15px;
+  padding: 1rem;
+}
+
+table,
+tr,
+th,
+td {
+  text-align: center;
+}
+
+.btn {
+  margin: 1rem;
+}
