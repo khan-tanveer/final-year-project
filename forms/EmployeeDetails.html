@@ -22,12 +22,15 @@
       href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
       rel="stylesheet"
     />
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
     <title>Document</title>
   </head>
   <body>
     <a class="btn btn-primary m-3" href="dashboard.html" role="button">Home</a>
     <div class="table-responsive">
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="tab">
         <tr class="active">
           <th>S.no</th>
           <th>First name</th>
@@ -52,55 +55,62 @@
           <td>test@test.com</td>
           <td>15/454,ffbhsdas,gfaysdg</td>
         </tr>
-        <tr>
-          <td>03</td>
-          <td>Amir</td>
-          <td>shaikh</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
-        <tr>
-          <td>04</td>
-          <td>Sohail</td>
-          <td>shaikh</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>Shubham</td>
-          <td>prasad</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>rajan</td>
-          <td>prasad</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>tanveer</td>
-          <td>khan</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>tanveer</td>
-          <td>khan</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
       </table>
     </div>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBjGa9zE7lt5WEd-3rRvAUmI7t2r6WUacA",
+        authDomain: "employees-payroll-location.firebaseapp.com",
+        databaseURL:
+          "https://employees-payroll-location-default-rtdb.firebaseio.com",
+        projectId: "employees-payroll-location",
+        storageBucket: "employees-payroll-location.appspot.com",
+        messagingSenderId: "291692531469",
+        appId: "1:291692531469:web:b62fa6da2b30f78394aa44",
+        measurementId: "G-3KLJY3P367",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      var firebaseRef = firebase.database().ref("Employee-Database");
+      firebaseRef.on("value", function (snapshot) {
+        // var data = snapshot.val();
+        // for (let i in data) {
+        //   console.log(data[i]);
+        // }
+        snapshot.forEach(function (element) {
+          console.log(element.val());
+          document.querySelector("#tab").innerHTML += `
+          <div>
+          <tr class="active">
+          <th>S.no</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>contact.no</th>
+          <th>Email</th>
+          <th>Address</th>
+        </tr>
+        <tr>
+          <td>01</td>
+          <td>tanveer</td>
+          <td>khan</td>
+          <td>987456321</td>
+          <td>test@test.com</td>
+          <td>15/454,ffbhsdas,gfaysdg</td>
+        </tr>
+        <tr>
+          <td>${element.key}</td>
+          <td>${element.val().displayName}</td>
+          <td>shaikh</td>
+          <td>${element.val().phoneNumber}</td>
+          <td>${element.val().email}</td>
+          <td>${element.val().photoUrl}</td>
+          </tr>
+          </div>
+          ${element.val()}
+          `;
+        });
+      });
+    </script>
   </body>
 </html>
