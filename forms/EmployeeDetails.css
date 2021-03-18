@@ -19,3 +19,8 @@ td {
 .btn {
   margin: 1rem;
 }
+
+.img-class {
+  width: 100px;
+  height: 100px;
+}

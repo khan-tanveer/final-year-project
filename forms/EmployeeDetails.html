@@ -22,42 +22,39 @@
       href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
       rel="stylesheet"
     />
+    <link href="EmployeeDetails.css" rel="stylesheet" />
 
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
     <title>Document</title>
   </head>
   <body>
     <a class="btn btn-primary m-3" href="dashboard.html" role="button">Home</a>
-    <div class="table-responsive">
-      <table class="table table-bordered" id="tab">
-        <tr class="active">
-          <th>S.no</th>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>contact.no</th>
+    <div class="container mt-3">
+      <table class="table">
+        <thead>
+          <th>Sr no</th>
+          <th>Emp Name</th>
           <th>Email</th>
-          <th>Address</th>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>tanveer</td>
-          <td>khan</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
-        <tr>
-          <td>02</td>
-          <td>meraj</td>
-          <td>shaikh</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
+          <th>contact</th>
+          <th>photo</th>
+        </thead>
+
+        <tbody id="tbody1">
+          <!-- <tr>
+            <td>1</td>
+            <td>khan</td>
+            <td>test@test.cjomm</td>
+            <td>466464</td>
+            <td>466464</td>
+          </tr> -->
+        </tbody>
       </table>
     </div>
+
     <script>
+      // ........................firebase configuration...............................................
       var firebaseConfig = {
         apiKey: "AIzaSyBjGa9zE7lt5WEd-3rRvAUmI7t2r6WUacA",
         authDomain: "employees-payroll-location.firebaseapp.com",
@@ -72,45 +69,100 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 
-      var firebaseRef = firebase.database().ref("Employee-Database");
-      firebaseRef.on("value", function (snapshot) {
-        // var data = snapshot.val();
-        // for (let i in data) {
-        //   console.log(data[i]);
-        // }
-        snapshot.forEach(function (element) {
-          console.log(element.val());
-          document.querySelector("#tab").innerHTML += `
-          <div>
-          <tr class="active">
-          <th>S.no</th>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>contact.no</th>
-          <th>Email</th>
-          <th>Address</th>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>tanveer</td>
-          <td>khan</td>
-          <td>987456321</td>
-          <td>test@test.com</td>
-          <td>15/454,ffbhsdas,gfaysdg</td>
-        </tr>
-        <tr>
-          <td>${element.key}</td>
-          <td>${element.val().displayName}</td>
-          <td>shaikh</td>
-          <td>${element.val().phoneNumber}</td>
-          <td>${element.val().email}</td>
-          <td>${element.val().photoUrl}</td>
-          </tr>
-          </div>
-          ${element.val()}
-          `;
-        });
-      });
+      // ...............................get all the data from firebase ...............................................
+      function selectAllData() {
+        firebase
+          .database()
+          .ref("Employee-Database")
+          .on("value", function (AllRecords) {
+            AllRecords.forEach(function (currentRecord) {
+              var Name = currentRecord.val().displayName;
+              var email = currentRecord.val().email;
+              var ContactNO = currentRecord.val().phoneNumber;
+              var photo = currentRecord.val().photoUrl;
+              AddItemsToTable(Name, email, ContactNO, photo);
+            });
+          });
+      }
+      window.onload = selectAllData;
+
+      // ....................filling the table....................................................................
+
+      var empNO = 0;
+
+      function AddItemsToTable(Name, email, ContactNO, photo) {
+        var tbody = document.getElementById("tbody1");
+        var trow = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        var td5 = document.createElement("td");
+        var td6 = document.createElement("img");
+        td6.className = "img-class";
+        td1.innerHTML = ++empNO;
+        td2.innerHTML = Name;
+        td3.innerHTML = email;
+        td4.innerHTML = ContactNO;
+        // td5.innerHTML = photo;
+        td6.src = photo;
+        trow.appendChild(td1);
+        trow.appendChild(td2);
+        trow.appendChild(td3);
+        trow.appendChild(td4);
+        trow.appendChild(td5);
+        td5.appendChild(td6);
+        tbody.appendChild(trow);
+      }
+      console.log(AddItemsToTable(Name, email, ContactNO, photo));
+
+      // var firebaseRef = firebase.database().ref("Employee-Database");
+      // firebaseRef.on("value", function (snapshot) {
+      //   // var data = snapshot.val();
+      //   // for (let i in data) {
+      //   //   console.log(data[i]);
+      //   // }
+      //   snapshot.forEach(function (element) {
+      //     console.log(element.val());
+      //     document.querySelector("#tab").innerHTML += `
+      //     <div>
+      //     <tr class="active">
+      //     <th>S.no</th>
+      //     <th>First name</th>
+      //     <th>Last name</th>
+      //     <th>contact.no</th>
+      //     <th>Email</th>
+      //     <th>Address</th>
+      //   </tr>
+      //   <tr>
+      //     <td>01</td>
+      //     <td>tanveer</td>
+      //     <td>khan</td>
+      //     <td>987456321</td>
+      //     <td>test@test.com</td>
+      //     <td>15/454,ffbhsdas,gfaysdg</td>
+      //   </tr>
+      //   <tr>
+      //     <td>${element.key}</td>
+      //     <td>${element.val().displayName}</td>
+      //     <td>shaikh</td>
+      //     <td>${element.val().phoneNumber}</td>
+      //     <td>${element.val().email}</td>
+      //     <td>${element.val().photoUrl}</td>
+      //     </tr>
+      //     <tr>
+      //     <td>${element.key}</td>
+      //     <td>${element.val().displayName[0]}</td>
+      //     <td>shaikh</td>
+      //     <td>${element.val().phoneNumber[1]}</td>
+      //     <td>${element.val().email[1]}</td>
+      //     <td>${element.val().photoUrl[1]}</td>
+      //     </tr>
+      //     </div>
+      //     // ${element.val()}
+      //     `;
+      //   });
+      // });
     </script>
   </body>
 </html>
