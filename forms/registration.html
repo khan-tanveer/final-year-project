@@ -11,6 +11,9 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -26,10 +29,10 @@
                 >Enter Username</label
               >
               <input
-                type="email"
+                type="text"
                 class="form-control"
                 placeholder="Enter Username "
-                id="exampleInputEmail1"
+                id="Username"
                 aria-describedby="emailHelp"
               /><br />
               <label for="exampleInputEmail1" class="form-label"
@@ -39,7 +42,7 @@
                 type="email"
                 class="form-control"
                 placeholder="Enter email "
-                id="exampleInputEmail1"
+                id="email"
                 aria-describedby="emailHelp"
               />
               <div id="emailHelp" class="form-text">
@@ -54,7 +57,7 @@
                 type="password"
                 class="form-control"
                 placeholder="password"
-                id="exampleInputPassword1"
+                id="password"
               />
             </div>
             <div class="mb-3 form-check">
@@ -71,7 +74,11 @@
                 <a href="index.html">Login form</a>
               </p>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
+            <button
+              onclick="registerUser()"
+              type="submit"
+              class="btn btn-primary btn-block"
+            >
               Submit
             </button>
           </form>
@@ -94,5 +101,48 @@
       integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
       crossorigin="anonymous"
     ></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script> -->
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script> -->
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyBjGa9zE7lt5WEd-3rRvAUmI7t2r6WUacA",
+        authDomain: "employees-payroll-location.firebaseapp.com",
+        databaseURL:
+          "https://employees-payroll-location-default-rtdb.firebaseio.com",
+        projectId: "employees-payroll-location",
+        storageBucket: "employees-payroll-location.appspot.com",
+        messagingSenderId: "291692531469",
+        appId: "1:291692531469:web:b62fa6da2b30f78394aa44",
+        measurementId: "G-3KLJY3P367",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+      function registerUser() {
+        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        firebase
+          .auth()
+          .createUserWithAndPassword(email, password)
+          .then(function () {
+            alert("user register successfully");
+          })
+          .catch(function (error) {
+            var errorcode = error.code;
+            var errormsg = error.message;
+          });
+      }
+    </script>
   </body>
 </html>
