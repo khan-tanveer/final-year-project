@@ -18,14 +18,14 @@
   </head>
   <body>
     <button href="dashboard.html" class="btn btn-primary btn-block">
-      <a href="dashboard.html">dashboard</a>
+      <a href="dashboard.html"> dashboard </a>
     </button>
     <section class="container-fluid">
       <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-3">
           <form class="form-container">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
+            <div class="mb-3" id="Registration">
+              <!-- <label for="exampleInputEmail1" class="form-label"
                 >Enter Username</label
               >
               <input
@@ -34,15 +34,16 @@
                 placeholder="Enter Username "
                 id="Username"
                 aria-describedby="emailHelp"
-              /><br />
+              /><br /> -->
               <label for="exampleInputEmail1" class="form-label"
                 >Email address</label
               >
               <input
-                type="email"
+                type="text"
                 class="form-control"
                 placeholder="Enter email "
                 id="email"
+                name="email"
                 aria-describedby="emailHelp"
               />
               <div id="emailHelp" class="form-text">
@@ -54,10 +55,11 @@
                 >Password</label
               >
               <input
-                type="password"
+                type="text"
                 class="form-control"
                 placeholder="password"
                 id="password"
+                name="password"
               />
             </div>
             <div class="mb-3 form-check">
@@ -74,11 +76,7 @@
                 <a href="index.html">Login form</a>
               </p>
             </div>
-            <button
-              onclick="registerUser()"
-              type="submit"
-              class="btn btn-primary btn-block"
-            >
+            <button onClick="RegisterUser()" class="btn btn-primary btn-block">
               Submit
             </button>
           </form>
@@ -103,7 +101,7 @@
     ></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script> -->
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -125,24 +123,25 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-      firebase.analytics();
+      // firebase.analytics();
 
-      function registerUser() {
-        var username = document.getElementById("username").value;
+      function RegisterUser() {
+        // var username = document.getElementById("username").value;
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
 
         firebase
           .auth()
-          .createUserWithAndPassword(email, password)
+          .createUserWithEmailAndPassword(email, password)
           .then(function () {
             alert("user register successfully");
           })
           .catch(function (error) {
-            var errorcode = error.code;
-            var errormsg = error.message;
+            var errorCode = error.code;
+            var errorMsg = error.message;
           });
       }
+      console.log(email, password);
     </script>
   </body>
 </html>
