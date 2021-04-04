@@ -11,10 +11,19 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script> -->
     <title>Document</title>
+    <!-- <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+    <!-- <link
+          rel="stylesheet"
+          type="text/css"
+          href="/resources/tutorial/css/example.css"
+          /> -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
   </head>
   <body>
     <button href="dashboard.html" class="btn btn-primary btn-block">
@@ -76,7 +85,11 @@
                 <a href="index.html">Login form</a>
               </p>
             </div>
-            <button onClick="RegisterUser()" class="btn btn-primary btn-block">
+            <button
+              type="button"
+              onClick="registerUser()"
+              class="btn btn-primary btn-block"
+            >
               Submit
             </button>
           </form>
@@ -100,13 +113,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script> -->
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script> -->
-
     <script>
       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -123,9 +129,9 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-      // firebase.analytics();
+      firebase.analytics();
 
-      function RegisterUser() {
+      function registerUser() {
         // var username = document.getElementById("username").value;
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
@@ -135,13 +141,19 @@
           .createUserWithEmailAndPassword(email, password)
           .then(function () {
             alert("user register successfully");
+            console.log(email, password);
           })
           .catch(function (error) {
             var errorCode = error.code;
             var errorMsg = error.message;
           });
       }
-      console.log(email, password);
     </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script> -->
   </body>
 </html>

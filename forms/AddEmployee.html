@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+  </head>
+  <body>
+    <button href="dashboard.html" class="btn btn-primary btn-block">
+      <a href="dashboard.html">dashboard</a>
+    </button>
+    <section class="container-fluid">
+      <section class="row justify-content-center">
+        <section class="col-12 col-sm-6 col-md-3">
+          <form class="form-container">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Name.. "
+                id="displayName"
+                aria-describedby="emailHelp"
+              />
+              <label for="exampleInputEmail1" class="form-label"
+                >Email address</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter email... "
+                id="email"
+                aria-describedby="emailHelp"
+              />
+              <div id="emailHelp" class="form-text">
+                We'll never share your email with anyone else.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >Phone No</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Enter Phone No.."
+                id="phoneNumber"
+              />
+            </div>
+
+            <button id="button" type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+          </form>
+        </section>
+      </section>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+      integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+      integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      //firebase config................................................................
+      var firebaseConfig = {
+        apiKey: "AIzaSyBjGa9zE7lt5WEd-3rRvAUmI7t2r6WUacA",
+        authDomain: "employees-payroll-location.firebaseapp.com",
+        databaseURL:
+          "https://employees-payroll-location-default-rtdb.firebaseio.com",
+        projectId: "employees-payroll-location",
+        storageBucket: "employees-payroll-location.appspot.com",
+        messagingSenderId: "291692531469",
+        appId: "1:291692531469:web:b62fa6da2b30f78394aa44",
+        measurementId: "G-3KLJY3P367",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      //form data sending request....................................
+      var firebaseRef = firebase.database().ref("Employee_Database"); //which get the database
+      let button = document.getElementById("button");
+
+      button.addEventListener("click", () => {
+        //get the value of the user
+        const displayName = document.getElementById("displayName").value;
+        const email = document.getElementById("email").value;
+        const phoneNumber = document.getElementById("phoneNumber").value;
+
+        if (displayName == "" || email == "" || phoneNumber == "") {
+          alert("please Enter the field");
+        } else {
+          // make the object
+          var employeeDatabase = {
+            displayName: displayName,
+            email: email,
+            phoneNumber: phoneNumber,
+          };
+
+          firebaseRef.push(employeeDatabase);
+        }
+      });
+    </script>
+  </body>
+</html>
