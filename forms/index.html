@@ -12,6 +12,9 @@
     />
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
   </head>
   <body>
     <button href="dashboard.html" class="btn btn-primary btn-block">
@@ -29,7 +32,7 @@
                 type="email"
                 class="form-control"
                 placeholder="Enter email "
-                id="exampleInputEmail1"
+                id="email"
                 aria-describedby="emailHelp"
               />
               <div id="emailHelp" class="form-text">
@@ -44,24 +47,20 @@
                 type="password"
                 class="form-control"
                 placeholder="password"
-                id="exampleInputPassword1"
+                id="password"
               />
             </div>
             <div class="mb-3 form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="exampleCheck1"
-              />
-              <label class="form-check-label" for="exampleCheck1"
-                >Check me out</label
-              >
               <p>
                 Do you have an a account?
                 <a href="registration.html">Register form</a>
               </p>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
+            <button
+              onClick="loginUser()"
+              type="button"
+              class="btn btn-primary btn-block"
+            >
               Login
             </button>
           </form>
@@ -84,5 +83,54 @@
       integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
       crossorigin="anonymous"
     ></script>
+
+    <!-- firebase  -->
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBjGa9zE7lt5WEd-3rRvAUmI7t2r6WUacA",
+        authDomain: "employees-payroll-location.firebaseapp.com",
+        databaseURL:
+          "https://employees-payroll-location-default-rtdb.firebaseio.com",
+        projectId: "employees-payroll-location",
+        storageBucket: "employees-payroll-location.appspot.com",
+        messagingSenderId: "291692531469",
+        appId: "1:291692531469:web:b62fa6da2b30f78394aa44",
+        measurementId: "G-3KLJY3P367",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      function loginUser() {
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+
+        if (email.trim() == "") {
+          alert("Enter Email");
+        } else if (password.trim().length < 7) {
+          alert("Password must be at least 7 characters");
+        } else {
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(function () {
+              alert("user Login successfully");
+              console.log(email, password);
+              window.location = "dashboard.html";
+            })
+            .catch(function (error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              alert(errorMessage);
+            });
+
+          // firebase.auth().onAuthStateChanged(function (user) {});
+          const user = firebase.auth().currentUser;
+          if (user) {
+            console.log(user);
+          }
+        }
+      }
+    </script>
   </body>
 </html>
