@@ -90,7 +90,7 @@
               onClick="registerUser()"
               class="btn btn-primary btn-block"
             >
-              Submit
+              Register
             </button>
           </form>
         </section>
@@ -135,6 +135,17 @@
         // var username = document.getElementById("username").value;
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
+
+        //   auth
+        // .createUserWithEmailAndPassword(email, password)
+        // .then((auth) => {
+        //   //it successfully create a new user with email and password
+        //   console.log(auth);
+        //   if (auth) {
+        //     history.push("/");
+        //   }
+        // })
+        // .catch((error) => alert(error.message));
 
         firebase
           .auth()
