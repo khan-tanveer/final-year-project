@@ -38,7 +38,7 @@
           <th>Emp Name</th>
           <th>Email</th>
           <th>contact</th>
-          <th>photo</th>
+          <!-- <th>photo</th> -->
         </thead>
 
         <tbody id="tbody1">
@@ -73,14 +73,14 @@
       function selectAllData() {
         firebase
           .database()
-          .ref("Employee-Database")
+          .ref("Employee_Database")
           .on("value", function (AllRecords) {
             AllRecords.forEach(function (currentRecord) {
-              var Name = currentRecord.val().displayName;
+              var displayName = currentRecord.val().displayName;
               var email = currentRecord.val().email;
-              var ContactNO = currentRecord.val().phoneNumber;
-              var photo = currentRecord.val().photoUrl;
-              AddItemsToTable(Name, email, ContactNO, photo);
+              var phoneNumber = currentRecord.val().phoneNumber;
+              // var photo = currentRecord.val().photoUrl;
+              AddItemsToTable(displayName, email, phoneNumber);
             });
           });
       }
@@ -90,31 +90,31 @@
 
       var empNO = 0;
 
-      function AddItemsToTable(Name, email, ContactNO, photo) {
+      function AddItemsToTable(displayName, email, phoneNumber) {
         var tbody = document.getElementById("tbody1");
         var trow = document.createElement("tr");
         var td1 = document.createElement("td");
         var td2 = document.createElement("td");
         var td3 = document.createElement("td");
         var td4 = document.createElement("td");
-        var td5 = document.createElement("td");
-        var td6 = document.createElement("img");
-        td6.className = "img-class";
+        // var td5 = document.createElement("td");
+        // var td6 = document.createElement("img");
+        // td6.className = "img-class";
         td1.innerHTML = ++empNO;
-        td2.innerHTML = Name;
+        td2.innerHTML = displayName;
         td3.innerHTML = email;
-        td4.innerHTML = ContactNO;
+        td4.innerHTML = phoneNumber;
         // td5.innerHTML = photo;
-        td6.src = photo;
+        // td6.src = photo;
         trow.appendChild(td1);
         trow.appendChild(td2);
         trow.appendChild(td3);
         trow.appendChild(td4);
-        trow.appendChild(td5);
-        td5.appendChild(td6);
+        // trow.appendChild(td5);
+        // td5.appendChild(td6);
         tbody.appendChild(trow);
       }
-      console.log(AddItemsToTable(Name, email, ContactNO, photo));
+      console.log(AddItemsToTable(displayName, email, phoneNumber));
 
       // var firebaseRef = firebase.database().ref("Employee-Database");
       // firebaseRef.on("value", function (snapshot) {
