@@ -28,6 +28,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="dashboard.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
   </head>
 
   <body>
@@ -239,6 +242,7 @@
       </nav>
 
       <!-- table -->
+      <button id="logoutBttn">logout</button>
 
 
       <div class="table-responsive">
@@ -349,53 +353,22 @@
       };
       firebase.initializeApp(firebaseConfig);
 
-      // let Empno = 0;
+  
 
-      // function addItemsToList(name, imageUrl, email, contactNo) {
-      //   let ul = document.getElementById("list");
-      //   let header = document.createElement("h2");
+      // fetch(
+      //   "https://employees-payroll-location-default-rtdb.firebaseio.com/Employee-Database"
+      // ).then((res) => response.email);
+      // console.log(res);
 
-      //   let _name = document.createElement("li");
-      //   let _imageUrl = document.createElement("li");
-      //   let _email = document.createElement("li");
-      //   let _contactNo = document.createElement("li");
 
-      //   header.innerHTML = "Employee-" + ++Empno;
-
-      //   _name.innerHTML = "Name: " + name;
-      //   _imageUrl.innerHTML = "Image: " + imageUrl;
-      //   _email.innerHTML = "Email: " + email;
-      //   _contactNo.innerHTML = "ContactNo: " + contactNo;
-
-      //   ul.apppendChild(header);
-      //   ul.apppendChild(_name);
-      //   ul.apppendChild(_imageUrl);
-      //   ul.apppendChild(_email);
-      //   ul.apppendChild(_contactNo);
-      // }
-
-      // function fetchAllData() {
-      //   firebase
-      //     .database()
-      //     .ref("Employee-Database")
-      //     .once("value", function (snapshot) {
-      //       snapshot.forEach(function (childSnapshot) {
-      //         let name = childSnapshot.val().name;
-      //         let image = childSnapshot.val().imageUrl;
-      //         let email = childSnapshot.val().email;
-      //         let contact = childSnapshot.val().contact - no;
-
-      //         addItemsToList(name, image, email);
-      //       });
-      //     });
-      // }
-
-      // window.onload(fetchAllData());
-
-      fetch(
-        "https://employees-payroll-location-default-rtdb.firebaseio.com/Employee-Database"
-      ).then((res) => response.email);
-      console.log(res);
+      const logoutBttn = document.getElementById('logoutBttn')
+      logoutBttn.addEventListener('click', function (e) {
+        e.preventDefault();
+        firebase.auth().signOut();
+        alert('user logged out!')
+        window.location = "index.html"
+        console.log('user signout !');
+      })
     </script>
     <!-- page-wrapper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
