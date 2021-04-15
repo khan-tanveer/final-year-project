@@ -132,6 +132,7 @@
             .then(function () {
               alert("user register successfully");
               console.log(email, password);
+              window.location = "dashboard.html";
             })
             .catch(function (error) {
               var errorCode = error.code;
