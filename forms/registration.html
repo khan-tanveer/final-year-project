@@ -108,19 +108,6 @@
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
 
-        // const auth = firebase.auth();
-
-        //   auth
-        // .createUserWithEmailAndPassword(email, password)
-        // .then((auth) => {
-        //   //it successfully create a new user with email and password
-        //   console.log(auth);
-        //   if (auth) {
-        //     history.push("/");
-        //   }
-        // })
-        // .catch((error) => alert(error.message));
-
         if (email.trim() == "") {
           alert("Enter Email");
         } else if (password.trim().length < 7) {
